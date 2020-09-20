@@ -1,0 +1,8 @@
+GET http://localhost:7777/api/item?id=99
+Accept: text/html
+
+<> 2020-09-20T054813.200.json
+<> 2020-09-20T053642.200.html
+<> 2020-09-20T053454.200.html
+
+###

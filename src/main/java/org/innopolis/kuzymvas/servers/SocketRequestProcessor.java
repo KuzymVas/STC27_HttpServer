@@ -26,10 +26,18 @@ public class SocketRequestProcessor implements  Runnable {
             state = ProcessorState.RUNNING;
             handler.handleConnection(socket.getInputStream(), socket.getOutputStream());
             state = ProcessorState.DONE;
+            System.out.println("Done responding. Shutting down responder thread");
         } catch (IOException e) {
             System.out.println("Failed to process request via socket: " + socket
                                        + " IO exception: " + e.getLocalizedMessage());
             state = ProcessorState.FAILED;
+        } finally {
+            try {
+                socket.close();
+            } catch (IOException e) {
+                System.out.println("Failed to close socket. IO exception: "+ e.getLocalizedMessage());
+                state = ProcessorState.FAILED;
+            }
         }
     }
 
