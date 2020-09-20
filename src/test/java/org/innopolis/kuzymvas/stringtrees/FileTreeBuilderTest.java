@@ -1,4 +1,4 @@
-package org.innopolis.kuzymvas.trees;
+package org.innopolis.kuzymvas.stringtrees;
 
 import org.junit.Assert;
 import org.junit.Before;

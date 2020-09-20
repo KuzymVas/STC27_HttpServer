@@ -1,4 +1,4 @@
-package org.innopolis.kuzymvas.trees;
+package org.innopolis.kuzymvas.stringtrees;
 
 import java.util.ArrayList;
 import java.util.List;

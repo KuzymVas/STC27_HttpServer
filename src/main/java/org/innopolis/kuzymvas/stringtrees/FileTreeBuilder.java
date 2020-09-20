@@ -1,8 +1,6 @@
-package org.innopolis.kuzymvas.trees;
+package org.innopolis.kuzymvas.stringtrees;
 
 import java.io.File;
-import java.util.List;
-import java.util.Objects;
 
 public class FileTreeBuilder {
 
