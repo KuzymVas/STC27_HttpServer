@@ -5,18 +5,31 @@ import org.innopolis.kuzymvas.handlers.HttpRequestHandler;
 import java.io.IOException;
 import java.net.Socket;
 
-public class SocketRequestProcessor implements  Runnable {
+/**
+ * Класс  сервера обработчика, выполняющего ответ на один запрос по данному ему сокету.
+ */
+public class SocketRequestProcessor implements Runnable {
 
     private final Socket socket;
     private final HttpRequestHandler handler;
     private volatile ProcessorState state;
 
-    public SocketRequestProcessor(Socket socket, HttpRequestHandler handler){
+    /**
+     * Создает новый сервер обработчика
+     *
+     * @param socket  - сокет для соединения с клиентом
+     * @param handler - обработчик запроса клиента
+     */
+    public SocketRequestProcessor(Socket socket, HttpRequestHandler handler) {
         this.socket = socket;
         this.handler = handler;
         state = ProcessorState.NOT_STARTED;
     }
 
+    /**
+     * Передает приданному HTTP обработчик потоки ввода и вывода данного серверу сокета
+     * Закрывает сокет после завершения обработки или при возникновении ошибки ввода\вывода
+     */
     @Override
     public void run() {
         if (state != ProcessorState.NOT_STARTED) {
@@ -35,7 +48,7 @@ public class SocketRequestProcessor implements  Runnable {
             try {
                 socket.close();
             } catch (IOException e) {
-                System.out.println("Failed to close socket. IO exception: "+ e.getLocalizedMessage());
+                System.out.println("Failed to close socket. IO exception: " + e.getLocalizedMessage());
                 state = ProcessorState.FAILED;
             }
         }
@@ -45,6 +58,9 @@ public class SocketRequestProcessor implements  Runnable {
         return state;
     }
 
+    /**
+     * Состояния сервера: не запущен, выполняется, запрос обработан, ошибка при обработке.
+     */
     public enum ProcessorState {
         NOT_STARTED,
         RUNNING,

@@ -3,6 +3,9 @@ package org.innopolis.kuzymvas.stringtrees;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Структура данных представдляющая собой дерево, где каждый узел - это строка
+ */
 public class StringTreeNode {
 
     private final String name;

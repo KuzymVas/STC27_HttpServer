@@ -1,8 +1,16 @@
 package org.innopolis.kuzymvas.http;
 
+/**
+ * Генерирует заголовки HTTP для ответов сервера
+ */
 public class HTTPResponseHeadersGenerator {
 
-
+    /**
+     * Добавляет к данному html документу корреткные заголовки для ответа с кодом 200, ОК
+     *
+     * @param html - строка с телом ответа
+     * @return - полный текст HTTP ответа, включая заголовки и тело
+     */
     public static String addOKHeaderToHTML(String html) {
         return getStatusLine(HTTPCode.OK_200) +
                 getContentTypeHeader() +
@@ -12,7 +20,12 @@ public class HTTPResponseHeadersGenerator {
                 html;
     }
 
-
+    /**
+     * Возвращает строку статуса, соответствующую запрашиваемому коду
+     *
+     * @param code - код статуса для формируемой строки
+     * @return - валидная строка статутса для HTTP 1.1
+     */
     public static String getStatusLine(HTTPCode code) {
         StringBuilder builder = new StringBuilder();
         builder.append("HTTP/1.1 ");
@@ -29,16 +42,32 @@ public class HTTPResponseHeadersGenerator {
         return builder.toString();
     }
 
-    public static  String getContentTypeHeader(){
+    /**
+     * Возвращает заголовок типа контента. В текущей реализации всегда возвращает тип text/html
+     *
+     * @return - строка заголовка Content-Type
+     */
+    public static String getContentTypeHeader() {
         return "Content-Type: text/html\r\n";
     }
 
+    /**
+     * Возвращает заголовок длины контента
+     *
+     * @param length - длина контента
+     * @return - строка заголовка Content-Length
+     */
     public static String getContentLengthHeader(int length) {
         return "Content-Length: " + length + "\r\n";
     }
 
-    public  static String getConnectionCloseHeader() {
-        return  "Connection: close\r\n";
+    /**
+     * Возвращает заголовок, указывающий клиенту закрыть соединение
+     *
+     * @return - строка заголовока  Connection: close
+     */
+    public static String getConnectionCloseHeader() {
+        return "Connection: close\r\n";
     }
 
     public enum HTTPCode {
